@@ -2,11 +2,25 @@
     --grid-side: 4;
     --default-color: white;
     --roundness: 20px;
+    --grid-size: 80vh;
 }
+
+header {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+
+.buttons {
+    width: var(--grid-size);
+    display: flex;
+    justify-content: space-between;
+}
+
 .grid {
     display: grid;
-    height: 80vh;
-    width: 80vh;
+    height: var(--grid-size);
+    width: var(--grid-size);
     grid-template-columns: repeat(var(--grid-side), 1fr);
     border: 1px solid black;
     border-radius: var(--roundness);
@@ -30,4 +44,65 @@
 
 .bot-right-corner {
     border-radius: 0px 0px var(--roundness) 0px;
+}
+
+main {
+    width: 100vw;
+    display: grid;
+    grid-template-columns: 1fr var(--grid-size) 1fr;
+    gap: 40px;
+}
+
+.grid {
+    grid-column: 2;
+    justify-self: center;
+    align-self: center;
+}
+
+.utils {
+    grid-column: 3;
+    justify-self: start;
+    align-self: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.colors {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px;
+}
+
+.color {
+    height: 20px;
+    width: 20px;
+    border: 1px solid black;
+    border-radius: 2px;
+}
+
+.col1 {
+    background-color: black;
+}
+.col2 {
+    background-color: white;
+}
+.col3 {
+    background-color: red;
+}
+.col4 {
+    background-color: orange;
+}
+.col5 {
+    background-color: yellow;
+}
+.col6 {
+    background-color: green;
+}
+.col7 {
+    background-color: blue;
+}
+.col8 {
+    background-color: purple;
 }

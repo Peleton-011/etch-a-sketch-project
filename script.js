@@ -31,9 +31,9 @@ function setup () {
         if (side > 100) {
             alert("That's too big :c");
             side = 100;
-        } else if (side < 1) {
+        } else if (side < 2) {
             alert("That's too smol :c")
-            side = 1;
+            side = 2;
         } 
         r.style.setProperty("--grid-side", String(side));
         populateGrid();
