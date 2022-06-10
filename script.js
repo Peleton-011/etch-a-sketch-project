@@ -1,5 +1,5 @@
-const grid = document.querySelector(".grid");
 const r = document.querySelector(":root");
+const grid = document.querySelector(".grid");
 
 let defaultColor = getComputedStyle(r).getPropertyValue("--default-color");
 
@@ -9,6 +9,8 @@ let mode = "mouseover";
 let side = getComputedStyle(r).getPropertyValue("--grid-side");
 
 function setup () {
+    populateGrid();
+
     const modeBtn = document.querySelector(".mode");
     modeBtn.addEventListener("click", () => {
         mode = (mode == "mouseover") ? "click" : "mouseover";
@@ -22,15 +24,22 @@ function setup () {
            children[i].style.backgroundColor = defaultColor;
         }        
     });
+
+    const newGridBtn = document.querySelector(".new");
+    newGridBtn.addEventListener("click", () => {
+        side = Number(prompt("What size should the new grid be?"));
+        r.style.setProperty("--grid-side", String(side));
+        populateGrid();
+    });
 }
 
 function populateGrid() {
-    //Empty out the current grid
-    grid.childNodes.forEach(cell => {
-        grid.removeChild(cell);        
-    });
+    //Remove old grid
+    while (grid.firstChild) {
+        grid.removeChild(grid.lastChild);
+    }
 
-    //Create the new grid
+    //Create new grid
     const cell = document.createElement("div");
     cell.classList.add("cell");
     for(let i = 0; i < (side * side); i++) {
@@ -69,4 +78,3 @@ function paint(e) {
 }
 
 setup();
-populateGrid();
