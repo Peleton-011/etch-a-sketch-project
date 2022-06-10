@@ -1,6 +1,7 @@
 const grid = document.querySelector(".grid")
 
 let color;
+let mode = "mouseover";
 
 function populateGrid(side) {
     //Empty out the current grid
@@ -11,16 +12,15 @@ function populateGrid(side) {
     //Create the new grid
     const cell = document.createElement("div");
     cell.classList.add("cell");
-    cell.addEventListener("onmouseover", paint);
     for(let i = 0; i < (side * side); i++) {
         grid.appendChild(cell.cloneNode(true));
+        grid.lastChild.addEventListener(mode, paint);
     }
 
 }
 
-//Hover event handler
 function paint(e) {
-
+    e.target.style.backgroundColor = "black";
 }
 
 populateGrid(4);
