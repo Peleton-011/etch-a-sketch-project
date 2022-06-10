@@ -1,0 +1,13 @@
+:root {
+    --grid-side: 4;
+}
+.grid {
+    display: grid;
+    height: 80vh;
+    width: auto;
+    grid-template-columns: repeat(var(--grid-side), 1fr);
+}
+
+.cell {
+    border: 1px solid black;
+}
