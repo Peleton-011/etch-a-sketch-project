@@ -28,6 +28,13 @@ function setup () {
     const newGridBtn = document.querySelector(".new");
     newGridBtn.addEventListener("click", () => {
         side = Number(prompt("What size should the new grid be?"));
+        if (side > 100) {
+            alert("That's too big :c");
+            side = 100;
+        } else if (side < 1) {
+            alert("That's too smol :c")
+            side = 1;
+        } 
         r.style.setProperty("--grid-side", String(side));
         populateGrid();
     });
