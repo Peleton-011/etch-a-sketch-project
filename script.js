@@ -18,6 +18,7 @@ document.body.onmouseup = () => {
   mouseDown = 0;
 }
 
+//Sets up events and creates initial grid
 function setup () {
     populateGrid();
 
@@ -70,6 +71,7 @@ function setup () {
       });
 }
 
+//Creates a grid of any size
 function populateGrid() {
     //Remove old grid
     while (grid.firstChild) {
@@ -110,6 +112,7 @@ function populateGrid() {
 
 }
 
+//Paints element "e" (Changes background color)
 function paint(e) {
     e.target.style.backgroundColor = color;
 }
