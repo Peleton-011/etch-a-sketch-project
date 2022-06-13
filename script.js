@@ -5,6 +5,7 @@ let defaultColor = getComputedStyle(r).getPropertyValue("--default-color");
 
 let color = getComputedStyle(r).getPropertyValue("--default-paint");
 let mode = "mouseover";
+let notProMode = true;
 
 let side = getComputedStyle(r).getPropertyValue("--grid-side");
 
@@ -21,12 +22,26 @@ document.body.onmouseup = () => {
 //Sets up events and creates initial grid
 function setup () {
     populateGrid();
+    document.querySelectorAll(".pro_tools").forEach(elem => {
+        updateHidden(elem);
+    });
+
+    //Pro utils mode button
+    const proModeBtn = document.querySelector(".pro_button");
+    proModeBtn.addEventListener("click", () => {
+        
+        notProMode = !notProMode;
+
+        document.querySelectorAll(".pro_tools").forEach(elem => {
+            updateHidden(elem);
+        });
+        
+    });
 
     //Color picker buttons
     const colorBtns = document.querySelectorAll(".color");
     colorBtns.forEach(btn => {
         btn.addEventListener("click", (e) => {
-            console.log(window.getComputedStyle(e.target).backgroundColor);
             color = window.getComputedStyle(e.target).backgroundColor;
         });
     });
@@ -69,6 +84,16 @@ function setup () {
            mouseDown = 0;
         }
       });
+}
+
+//Hides or unhides all elements below the one you pass
+function updateHidden(elem) {
+    elem.childNodes.forEach(child => {
+        if (child.firstChild) {
+            updateHidden(child);
+        }
+        child.hidden = notProMode;
+    });
 }
 
 //Creates a grid of any size

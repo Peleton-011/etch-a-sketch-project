@@ -12,7 +12,10 @@
 
     <header>
         <div class="buttons">
-            <button class="mode">Mode: Mouseover</button>
+            <div class="left_buttons">
+                <button class="mode">Mode: Mouseover</button>
+                <button class="pro_button">Extended toolset</button>
+            </div>
             <button class="new">New Grid</button>  
         </div>      
     </header>
@@ -21,7 +24,6 @@
 
         </div>
         <div class="utils">
-            <button class="reset">Restart</button>
             <div class="colors">
                 <div class="color col1"></div>
                 <div class="color col2"></div>
@@ -32,6 +34,12 @@
                 <div class="color col7"></div>
                 <div class="color col8"></div>
             </div>
+            <div class="pro_tools" id="pro_utils">
+                <input type="color" value="#FFF" class="color_selector">
+                <input type="range" min="1" max="100" value="50" class="slider" orient="vertical" id="opacity" name="opacity" oninput="amount.value=opacity.value">
+                <p class="output" ><output name="amount" id="amount" for="opacity">0</output>%</p >
+            </div>
+            <button class="reset">Restart</button>
         </div>
     </main>
     <footer>
