@@ -1,24 +1,20 @@
 const r = document.querySelector(":root");
 const grid = document.querySelector(".grid");
 
-let defaultColor = getComputedStyle(r).getPropertyValue("--default-color");
-
-let color = "black";
+let color = getComputedStyle(r).getPropertyValue("--default-color");
 let mode = "mouseover";
 
 let side = getComputedStyle(r).getPropertyValue("--grid-side");
 
+//Keep track of the state of the mouse (Whether it's being clicked or not)
 var mouseDown = 0;
 
-
-//Keep track of the state of the mouse (Whether it's being clicked or not)
 document.body.onmousedown = () => { 
   ++mouseDown;
 }
 document.body.onmouseup = () => {
   --mouseDown;
 }
-
 
 function setup () {
     populateGrid();
