@@ -8,6 +8,18 @@ let mode = "mouseover";
 
 let side = getComputedStyle(r).getPropertyValue("--grid-side");
 
+var mouseDown = 0;
+
+
+//Keep track of the state of the mouse (Whether it's being clicked or not)
+document.body.onmousedown = () => { 
+  ++mouseDown;
+}
+document.body.onmouseup = () => {
+  --mouseDown;
+}
+
+
 function setup () {
     populateGrid();
 
@@ -66,13 +78,13 @@ function populateGrid() {
                 break;
         }
         grid.appendChild(newCell);
-        grid.lastChild.addEventListener("click", (e) => {
+        grid.lastChild.addEventListener("mousedown", (e) => {
             if (mode == "click") {
                 paint(e);
             }
         });
         grid.lastChild.addEventListener("mouseover", (e) => {
-            if (mode != "click") {
+            if ((mode != "click")||(mouseDown)) {
                 paint(e);
             }
         });
