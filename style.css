@@ -1,6 +1,7 @@
 :root {
     --grid-side: 4;
     --default-color: white;
+    --default-paint: black;
     --roundness: 20px;
     --grid-size: 80vh;
 }

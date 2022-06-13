@@ -1,7 +1,9 @@
 const r = document.querySelector(":root");
 const grid = document.querySelector(".grid");
 
-let color = getComputedStyle(r).getPropertyValue("--default-color");
+let defaultColor = getComputedStyle(r).getPropertyValue("--default-color");
+
+let color = getComputedStyle(r).getPropertyValue("--default-paint");
 let mode = "mouseover";
 
 let side = getComputedStyle(r).getPropertyValue("--grid-side");
@@ -10,21 +12,32 @@ let side = getComputedStyle(r).getPropertyValue("--grid-side");
 var mouseDown = 0;
 
 document.body.onmousedown = () => { 
-  ++mouseDown;
+  mouseDown = 1;
 }
 document.body.onmouseup = () => {
-  --mouseDown;
+  mouseDown = 0;
 }
 
 function setup () {
     populateGrid();
 
+    //Color picker buttons
+    const colorBtns = document.querySelectorAll(".color");
+    colorBtns.forEach(btn => {
+        btn.addEventListener("click", (e) => {
+            console.log(window.getComputedStyle(e.target).backgroundColor);
+            color = window.getComputedStyle(e.target).backgroundColor;
+        });
+    });
+
+    //Mode button, either mouseover or click
     const modeBtn = document.querySelector(".mode");
     modeBtn.addEventListener("click", () => {
         mode = (mode == "mouseover") ? "click" : "mouseover";
         modeBtn.textContent = "Mode: " + mode.replace(mode[0], mode[0].toUpperCase());
     });
     
+    //Reset button, paints all cells in the grid in the default color
     const resetBtn = document.querySelector(".reset");
     resetBtn.addEventListener("click", () => {
         for(let i = 0; i < side * side; i++) {
@@ -33,6 +46,7 @@ function setup () {
         }        
     });
 
+    //New grid button, generates a new grid of the desired size, from 2x2 to 100x100
     const newGridBtn = document.querySelector(".new");
     newGridBtn.addEventListener("click", () => {
         side = Number(prompt("What size should the new grid be?"));
@@ -46,6 +60,14 @@ function setup () {
         r.style.setProperty("--grid-side", String(side));
         populateGrid();
     });
+
+    //Detect when the mouse leaves the screen
+    document.addEventListener("mouseleave", function(event){
+        if(event.clientY <= 0 || event.clientX <= 0 || (event.clientX >= window.innerWidth || event.clientY >= window.innerHeight))
+        {
+           mouseDown = 0;
+        }
+      });
 }
 
 function populateGrid() {
