@@ -26,6 +26,12 @@ function setup () {
         updateHidden(elem);
     });
 
+    //Color picker reader
+    const colorSelector = document.querySelector(".color_selector");
+    colorSelector.addEventListener("change", e => {
+        color = e.target.value;
+    });
+
     //Pro utils mode button
     const proModeBtn = document.querySelector(".pro_button");
     proModeBtn.addEventListener("click", () => {
@@ -122,17 +128,17 @@ function populateGrid() {
                 newCell.classList.add("bot-right-corner");
                 break;
         }
-        grid.appendChild(newCell);
-        grid.lastChild.addEventListener("mousedown", (e) => {
+        newCell.addEventListener("mousedown", (e) => {
             if (mode == "click") {
                 paint(e);
             }
         });
-        grid.lastChild.addEventListener("mouseover", (e) => {
+        newCell.addEventListener("mouseover", (e) => {
             if ((mode != "click")||(mouseDown)) {
                 paint(e);
             }
         });
+        grid.appendChild(newCell);
     }
 
 }
