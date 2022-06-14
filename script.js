@@ -138,6 +138,15 @@ function populateGrid() {
                 paint(e);
             }
         });
+
+        newCell.addEventListener('dragstart', (e) => {
+            e.preventDefault()
+          });
+          
+        newCell.addEventListener('drop', (e) => {
+            e.preventDefault()
+          });
+
         grid.appendChild(newCell);
     }
 

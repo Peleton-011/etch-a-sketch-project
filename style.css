@@ -59,7 +59,6 @@ main {
     grid-column: 2;
     justify-self: center;
     align-self: center;
-    pointer-events: none;
 }
 
 .utils {
