@@ -28,6 +28,7 @@ function setup() {
     reset();
     changeColor(color);
 
+    //Opacity toggle switch
     const opacityBtn = document.querySelector(".opacityMode")
     opacityBtn.addEventListener("click", (e) => {
         opacityBtn.classList.toggle("inactive");
@@ -60,6 +61,7 @@ function setup() {
     colorBtns.forEach((btn) => {
         btn.addEventListener("click", (e) => {
             color = window.getComputedStyle(e.target).backgroundColor;
+            changeColor(color)
         });
     });
 
