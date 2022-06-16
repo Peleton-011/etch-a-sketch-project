@@ -29,9 +29,9 @@ header {
     /* border-radius: var(--roundness); */
 }
 
-.cell {
-    /* border: 1px solid var(--main-color); */
-}
+/* .cell {
+    border: 1px solid var(--main-color); 
+} */
 
 .top-left-corner {
     border-radius: var(--roundness) 0px 0px 0px;

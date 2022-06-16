@@ -6,6 +6,7 @@ let defaultColor = getComputedStyle(r).getPropertyValue("--default-color");
 let color = getComputedStyle(r).getPropertyValue("--default-paint");
 let ryb;
 let opacityMode = false;
+let randomMode = false;
 let opacity = 50;
 let mode = "mouseover";
 let notProMode = true;
@@ -30,6 +31,13 @@ function setup() {
     //Update at every click
     const bod = document.querySelector("body");
     bod.addEventListener("click", update);
+
+    //Random color button
+    const randomBtn = document.querySelector(".random");
+    randomBtn.addEventListener("click", () => {
+        randomMode = !randomMode;
+        randomBtn.textContent = randomMode ? "Stop this madness" : "Random!";
+    });
 
     //Opacity slider
     const opacitySld = document.querySelector("#opacity");
@@ -206,6 +214,15 @@ function populateGrid() {
 
 //Paints element "e" (Changes background color)
 function paint(e) {
+
+    if (randomMode) {
+        let r = Math.floor(Math.random() * 256);
+        let g = Math.floor(Math.random() * 256);
+        let b = Math.floor(Math.random() * 256);
+
+        color = rgbToStr(r, g, b);
+        changeColor(color);
+    }
 
     if (!opacityMode) {
         e.target.style.backgroundColor = color;
