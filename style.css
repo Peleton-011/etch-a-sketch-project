@@ -8,7 +8,7 @@
 }
 
 body {
-    background-color: #faeee7;
+    background-color: #fef6e4;
 }
 
 header {
@@ -164,4 +164,16 @@ main {
     border-radius: 50%;
     background: #04AA6D;
     cursor: pointer;
+}
+
+button {
+    color: #001858;
+    font-family: Kanit;
+    font-weight: 400;
+    font-size: 14px;
+    padding: 8px 16px;
+    border: 0px solid #001858;
+    border-radius: 9px;
+    background-color: #fef6e4;
+    box-shadow: 2px 2px 5px #000000;
 }
