@@ -25,7 +25,6 @@ document.body.onmouseup = () => {
 //Sets up events and creates initial grid
 function setup() {
     populateGrid();
-    reset();
     changeColor(color);
 
     //Opacity slider
@@ -155,20 +154,20 @@ function populateGrid() {
     cell.classList.add("cell");
     for (let i = 0; i < side * side; i++) {
         const newCell = cell.cloneNode(true);
-        switch (i) {
-            case 0:
-                newCell.classList.add("top-left-corner");
-                break;
-            case side - 1:
-                newCell.classList.add("top-right-corner");
-                break;
-            case side * (side - 1):
-                newCell.classList.add("bot-left-corner");
-                break;
-            case side * side - 1:
-                newCell.classList.add("bot-right-corner");
-                break;
-        }
+        // switch (i) {
+        //     case 0:
+        //         newCell.classList.add("top-left-corner");
+        //         break;
+        //     case side - 1:
+        //         newCell.classList.add("top-right-corner");
+        //         break;
+        //     case side * (side - 1):
+        //         newCell.classList.add("bot-left-corner");
+        //         break;
+        //     case side * side - 1:
+        //         newCell.classList.add("bot-right-corner");
+        //         break;
+        // }
         newCell.addEventListener("mousedown", (e) => {
             if (mode == "click") {
                 paint(e);
@@ -190,6 +189,7 @@ function populateGrid() {
 
         grid.appendChild(newCell);
     }
+    reset();
 }
 
 //Paints element "e" (Changes background color)
