@@ -27,9 +27,14 @@ function setup() {
     populateGrid();
     changeColor(color);
 
+    //Update at every click
+    const bod = document.querySelector("body");
+    bod.addEventListener("click", update);
+
     //Opacity slider
     const opacitySld = document.querySelector("#opacity");
     const opacityOut = document.querySelector("#opacityOut")
+    opacitySld.value = opacity;
     opacityOut.innerHTML = opacitySld.value;
     opacitySld.addEventListener("input", (e) => {
         opacity = opacitySld.value;
@@ -52,7 +57,7 @@ function setup() {
 
     //Color picker reader
     const colorSelector = document.querySelector(".color_selector");
-    colorSelector.addEventListener("change", (e) => {
+    colorSelector.addEventListener("input", (e) => {
         color = e.target.value;
         changeColor(color)
     });
@@ -134,6 +139,13 @@ function reset() {
         let children = grid.childNodes;
         children[i].style.backgroundColor = defaultColor;
     }
+}
+
+//Updates some visual stuff
+function update() {
+    const colorSelector = document.querySelector(".color_selector");
+    const aux = strToRgb(color)
+    colorSelector.value = rgbToStr(aux[0], aux[1], aux[2]);
 }
 
 //Sets everything up for mixing of colors
