@@ -28,15 +28,27 @@ function setup() {
     reset();
     changeColor(color);
 
+    //Opacity slider
+    const opacitySld = document.querySelector("#opacity");
+    const opacityOut = document.querySelector("#opacityOut")
+    opacityOut.innerHTML = opacitySld.value;
+    opacitySld.addEventListener("input", (e) => {
+        opacity = opacitySld.value;
+        opacityOut.innerHTML = opacity;
+    });
+
     //Opacity toggle switch
     const opacityBtn = document.querySelector(".opacityMode")
     opacityBtn.addEventListener("click", (e) => {
         opacityBtn.classList.toggle("inactive");
+        updateHidden(document.querySelector(".opacityInputs"), opacityMode);
         opacityMode = !opacityMode;
+        opacityBtn.textContent = opacityMode ? "Opacity: On" : "Opacity: Off";
     });
 
+    //Hide protools stuff 
     document.querySelectorAll(".pro_tools").forEach((elem) => {
-        updateHidden(elem);
+        updateHidden(elem, notProMode);
     });
 
     //Color picker reader
@@ -52,8 +64,10 @@ function setup() {
         notProMode = !notProMode;
 
         document.querySelectorAll(".pro_tools").forEach((elem) => {
-            updateHidden(elem);
+            updateHidden(elem, notProMode);
         });
+
+        updateHidden(document.querySelector(".opacityInputs"), !opacityMode);
     });
 
     //Color picker buttons
@@ -106,12 +120,12 @@ function setup() {
 }
 
 //Hides or unhides all elements below the one you pass
-function updateHidden(elem) {
+function updateHidden(elem, condition) {
     elem.childNodes.forEach((child) => {
         if (child.firstChild) {
-            updateHidden(child);
+            updateHidden(child, condition);
         }
-        child.hidden = notProMode;
+        child.hidden = condition;
     });
 }
 
