@@ -7,6 +7,10 @@
     --main-color: #33272a;
 }
 
+body {
+    background-color: #faeee7;
+}
+
 header {
     display: flex;
     justify-content: center;
@@ -60,7 +64,7 @@ main {
     grid-column: 2;
     justify-self: center;
     align-self: center;
-    color: #000000;
+    color: var(--main-color);
     box-shadow: 2px 2px 5px;
 }
 
@@ -85,7 +89,7 @@ main {
     width: 30px;
     /* border: 1px solid var(--main-color); */
     border-radius: 2px;
-    color: #000000;
+    color: var(--main-color);
     box-shadow: 2px 2px 5px;
 }
 
@@ -128,7 +132,8 @@ main {
 }
 
 .slider {
-    -webkit-appearance: none;
+    -webkit-appearance: slider-vertical;
+    writing-mode: bt-lr;
     height: 200px;
     width: 15px;
     border-radius: 5px;  
