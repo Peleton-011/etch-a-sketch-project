@@ -8,14 +8,27 @@
 }
 
 body {
+    height: 100vh;
+    width: 100vw;
+    padding: 0px;
+    margin: 0px;
     background-color: #fef6e4;
+    display: grid;
+    grid-template-areas: 
+    "header header header"
+    "blank main sidebar"
+    "footer footer footer";
+    grid-template-columns: 1fr var(--grid-size) 1fr;
+    grid-template-rows: 8vh 87vh 5vh;
 }
 
 header {
+    height: 8vh;
+    background-color: #001858;
+    grid-area: header;
     display: flex;
     justify-content: center;
-    align-self: center;
-    margin-left: 10px;
+    align-items: center;
 }
 
 .buttons {
@@ -24,13 +37,20 @@ header {
     justify-content: space-between;
 }
 
+
+
 .grid {
+    grid-area: main;
+    margin-top: 3vh;
     display: grid;
     height: var(--grid-size);
     width: var(--grid-size);
     grid-template-columns: repeat(var(--grid-side), 1fr);
     /* border: 1px solid var(--main-color); */
     /* border-radius: var(--roundness); */
+    grid-column: 2;
+    color: var(--main-color);
+    box-shadow: 2px 2px 5px;
 }
 
 /* .cell {
@@ -53,27 +73,16 @@ header {
     border-radius: 0px 0px var(--roundness) 0px;
 }
 
-main {
-    width: 100vw;
-    display: grid;
-    grid-template-columns: 1fr var(--grid-size) 1fr;
-    gap: 40px;
-}
-
-.grid {
-    grid-column: 2;
-    justify-self: center;
-    align-self: center;
-    color: var(--main-color);
-    box-shadow: 2px 2px 5px;
+.left-side {
+    grid-area: blank;
 }
 
 .utils {
+    grid-area: sidebar;
     grid-column: 3;
-    justify-self: start;
-    align-self: center;
     display: flex;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
     gap: 10px;
 }
@@ -122,6 +131,7 @@ main {
     display: flex;
     flex-direction: column;
     align-items: center;
+    gap: 15px;
 }
 
 .color_selector {
@@ -166,6 +176,19 @@ main {
     cursor: pointer;
 }
 
+header button {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    color: #f3d2c1;
+    font-size: 16px;
+    height: 4vh;
+    border-radius: 0px;
+    border: 2px solid #f3d2c1;
+    background-color: #001858;
+    box-shadow: none;
+    margin: 0px -2px;
+}
+
 button {
     color: #001858;
     font-family: Kanit;
@@ -176,4 +199,19 @@ button {
     border-radius: 9px;
     background-color: #fef6e4;
     box-shadow: 2px 2px 5px #000000;
+}
+
+footer {
+    grid-area: footer;
+    background-color: #001858;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-text {
+    color: #fef6e4;
+    font-family: Kanit;
+    font-weight: 400;
+    font-size: 16px;
 }
