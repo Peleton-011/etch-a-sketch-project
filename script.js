@@ -15,14 +15,7 @@ let notProMode = true;
 let side = getComputedStyle(r).getPropertyValue("--grid-side");
 
 //Keep track of the state of the mouse (Whether it's being clicked or not)
-var mouseDown = 0;
-
-document.body.onmousedown = () => {
-    mouseDown = 1;
-};
-document.body.onmouseup = () => {
-    mouseDown = 0;
-};
+var mouseDown = false;
 
 //Sets up events and creates initial grid
 function setup() {
@@ -33,11 +26,19 @@ function setup() {
     const colPickerBtn = document.querySelector(".color-picker");
     colPickerBtn.addEventListener("click", () => {
         pickingColor = !pickingColor;
-    }) 
+    });
 
     //Update at every click
     const bod = document.querySelector("body");
     bod.addEventListener("click", update);
+
+    bod.addEventListener("mousedown", () => {
+        mouseDown = true;
+    });
+
+    bod.addEventListener("mouseup", () => {
+        mouseDown = false;
+    });
 
     //Random color button
     const randomBtn = document.querySelector(".random");
