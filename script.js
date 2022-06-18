@@ -6,6 +6,7 @@ let defaultColor = getComputedStyle(r).getPropertyValue("--default-color");
 let color = getComputedStyle(r).getPropertyValue("--default-paint");
 let ryb;
 let opacityMode = false;
+let pickingColor = false;
 let randomMode = false;
 let opacity = 50;
 let mode = "mouseover";
@@ -27,6 +28,12 @@ document.body.onmouseup = () => {
 function setup() {
     populateGrid();
     changeColor(color);
+
+    //Pick a color from the current grid
+    const colPickerBtn = document.querySelector(".color-picker");
+    colPickerBtn.addEventListener("click", () => {
+        pickingColor = !pickingColor;
+    }) 
 
     //Update at every click
     const bod = document.querySelector("body");
@@ -189,12 +196,15 @@ function populateGrid() {
         //         break;
         // }
         newCell.addEventListener("mousedown", (e) => {
-            if (mode == "click") {
+            if ((mode == "click") && !pickingColor) {
                 paint(e);
+            } else if (pickingColor) {
+                color = e.target.style.backgroundColor;
+                pickingColor = false;
             }
         });
         newCell.addEventListener("mouseover", (e) => {
-            if (mode != "click" || mouseDown) {
+            if ((mode != "click" || mouseDown) && !pickingColor) {
                 paint(e);
             }
         });
