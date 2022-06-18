@@ -41,7 +41,7 @@ function setup() {
 
     //Opacity slider
     const opacitySld = document.querySelector("#opacity");
-    const opacityOut = document.querySelector("#opacityOut")
+    const opacityOut = document.querySelector("#opacityOut");
     opacitySld.value = opacity;
     opacityOut.innerHTML = opacitySld.value;
     opacitySld.addEventListener("input", (e) => {
@@ -50,7 +50,7 @@ function setup() {
     });
 
     //Opacity toggle switch
-    const opacityBtn = document.querySelector(".opacityMode")
+    const opacityBtn = document.querySelector(".opacityMode");
     opacityBtn.addEventListener("click", (e) => {
         opacityBtn.classList.toggle("inactive");
         updateHidden(document.querySelector(".opacityInputs"), opacityMode);
@@ -58,16 +58,16 @@ function setup() {
         opacityBtn.textContent = opacityMode ? "Opacity: On" : "Opacity: Off";
     });
 
-    //Hide protools stuff 
+    //Hide protools stuff
     document.querySelectorAll(".pro_tools").forEach((elem) => {
         updateHidden(elem, notProMode);
     });
 
     //Color picker reader
-    const colorSelector = document.querySelector(".color_selector");
+    const colorSelector = document.querySelector(".color-selector");
     colorSelector.addEventListener("input", (e) => {
         color = e.target.value;
-        changeColor(color)
+        changeColor(color);
     });
 
     //Pro utils mode button
@@ -87,7 +87,7 @@ function setup() {
     colorBtns.forEach((btn) => {
         btn.addEventListener("click", (e) => {
             color = window.getComputedStyle(e.target).backgroundColor;
-            changeColor(color)
+            changeColor(color);
         });
     });
 
@@ -151,8 +151,8 @@ function reset() {
 
 //Updates some visual stuff
 function update() {
-    const colorSelector = document.querySelector(".color_selector");
-    const aux = strToRgb(color)
+    const colorSelector = document.querySelector(".color-selector");
+    const aux = strToRgb(color);
     colorSelector.value = rgbToStr(aux[0], aux[1], aux[2]);
 }
 
@@ -214,7 +214,6 @@ function populateGrid() {
 
 //Paints element "e" (Changes background color)
 function paint(e) {
-
     if (randomMode) {
         let r = Math.floor(Math.random() * 256);
         let g = Math.floor(Math.random() * 256);
@@ -233,7 +232,6 @@ function paint(e) {
 
 // Convert red-green-blue to red-yellow-blue system.
 function rgbToRyb(r, g, b) {
-
     // Remove the whiteness from the color.
     let w = Math.min(r, g, b);
     r = r - w;
@@ -278,7 +276,6 @@ function rgbToRyb(r, g, b) {
 
 // Convert red-yellow-blue to red-green-blue system.
 function rybToRgb(r, y, b) {
-
     // Remove the whiteness from the color.
     let w = Math.min(r, y, b);
     r = r - w;
@@ -317,51 +314,48 @@ function rybToRgb(r, y, b) {
 
     const rgb = [r.toFixed(0), g.toFixed(0), b.toFixed(0)];
     // And return back the ryb typed accordingly.
-    return (rgb);
+    return rgb;
 }
 
 // Return the complementary color values for a given color.
 function complimentary(r, g, b, limit) {
     if (!limit) limit = 255;
-    const result = [limit - r, limit - g, limit - b]; 
+    const result = [limit - r, limit - g, limit - b];
     return result;
 }
 
-function strToRgb (str = "#ffffff") {
+function strToRgb(str = "#ffffff") {
     let r;
     let g;
     let b;
-    
-    if (str.slice(0,1) == "#") {
 
+    if (str.slice(0, 1) == "#") {
         str = str.slice(1);
 
-        r = parseInt(str.slice(0,2), 16);
-        g = parseInt(str.slice(2,4), 16);
+        r = parseInt(str.slice(0, 2), 16);
+        g = parseInt(str.slice(2, 4), 16);
         b = parseInt(str.slice(4), 16);
-
-    } else if (str.slice(0,3) == "rgb") {
-
+    } else if (str.slice(0, 3) == "rgb") {
         str = str.slice(4);
-        str = str.replace(")", "")
+        str = str.replace(")", "");
         const strs = str.split(", ");
 
         r = Number(strs[0]);
         g = Number(strs[1]);
         b = Number(strs[2]);
     }
-    
+
     const rgb = [r, g, b];
     return rgb;
 }
 
-function rgbToStr (r = 255, g = 255, b = 255) {
+function rgbToStr(r = 255, g = 255, b = 255) {
     let color = "#";
 
     r = Number(r);
     g = Number(g);
     b = Number(b);
-    
+
     color += r.toString(16).padStart(2, "0");
     color += g.toString(16).padStart(2, "0");
     color += b.toString(16).padStart(2, "0");
@@ -370,8 +364,7 @@ function rgbToStr (r = 255, g = 255, b = 255) {
 }
 
 //Paints the cell that triggered e as the mix of paint color and current color of that element
-function mix(e){
-
+function mix(e) {
     let currColor = e.target.style.backgroundColor;
     let rgb2 = strToRgb(currColor);
     const ryb2 = rgbToRyb(rgb2[0], rgb2[1], rgb2[2]);
@@ -379,9 +372,9 @@ function mix(e){
 
     for (let i = 0; i < 3; i++) {
         let proportioned1 = Number(ryb[i]) * (opacity / 100);
-        let proportioned2 = Number(ryb2[i]) * (1 - (opacity / 100));
+        let proportioned2 = Number(ryb2[i]) * (1 - opacity / 100);
         let aux = proportioned1 + proportioned2;
-        finalRyb.push(aux.toFixed(0));    
+        finalRyb.push(aux.toFixed(0));
     }
 
     const result = rybToRgb(finalRyb[0], finalRyb[1], finalRyb[2]);
