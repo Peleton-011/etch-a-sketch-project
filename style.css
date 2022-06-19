@@ -31,6 +31,12 @@ header {
     align-items: center;
 }
 
+.not-pro {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
 .buttons {
     width: var(--grid-size);
     display: flex;

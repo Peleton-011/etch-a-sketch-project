@@ -6,11 +6,10 @@ let defaultColor = getComputedStyle(r).getPropertyValue("--default-color");
 let color = getComputedStyle(r).getPropertyValue("--default-paint");
 let oldColor = color;
 let ryb;
-let opacityMode, pickingColor, randomMode, erasing;
-opacityMode = pickingColor = randomMode = erasing = false;
+let opacityMode, pickingColor, randomMode, erasing, proMode;
+opacityMode = pickingColor = randomMode = erasing = proMode = false;
 let opacity = 50;
 let mode = "mouseover";
-let notProMode = true;
 
 let side = getComputedStyle(r).getPropertyValue("--grid-side");
 
@@ -31,19 +30,22 @@ function setup() {
         reloadCss();
     });
 
-    //Erase button
-    const eraseBtn = document.querySelector(".erase");
-    eraseBtn.addEventListener("click", (e) => {
-        toggleActive(e);
-
-        if (erasing) {
-            color = oldColor;
-        } else {
-            oldColor = color;
-            color = defaultColor;
-        }
-
-        erasing = !erasing;
+    //Erase button(s)
+    document.querySelectorAll(".erase").forEach((eraseBtn) => {
+        eraseBtn.addEventListener("click", (e) => {
+            document.querySelectorAll(".erase").forEach((eraseBtns) => {
+                eraseBtns.classList.toggle("active");
+            })
+    
+            if (erasing) {
+                color = oldColor;
+            } else {
+                oldColor = color;
+                color = defaultColor;
+            }
+    
+            erasing = !erasing;
+        });    
     });
 
     //Github profile button
@@ -103,7 +105,7 @@ function setup() {
 
     //Hide protools stuff
     document.querySelectorAll(".pro-tools").forEach((elem) => {
-        updateHidden(elem, notProMode);
+        updateHidden(elem, !proMode);
     });
 
     //Color picker reader
@@ -118,10 +120,14 @@ function setup() {
     proModeBtn.addEventListener("click", (e) => {
         toggleActive(e);
 
-        notProMode = !notProMode;
+        proMode = !proMode;
+
+        document.querySelectorAll(".not-pro").forEach((e) => {
+            updateHidden(e, proMode);
+        });
 
         document.querySelectorAll(".pro-tools").forEach((elem) => {
-            updateHidden(elem, notProMode);
+            updateHidden(elem, !proMode);
         });
 
         updateHidden(document.querySelector(".opacityInputs"), !opacityMode);
