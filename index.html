@@ -15,9 +15,9 @@
     <body>
         <header>
             <div class="buttons">
-                <div class="left_buttons">
+                <div class="left-buttons">
                     <button class="mode">Mode: Mouseover</button
-                    ><button class="pro_button">Extended toolset</button>
+                    ><button class="pro-button">Extended toolset</button>
                 </div>
                 <button class="new">New Grid</button>
             </div>
@@ -27,7 +27,7 @@
             <div class="grid"></div>
         </main>
         <div class="utils">
-            <div class="colors">
+            <div class="colors not-pro">
                 <div class="color col1"></div>
                 <div class="color col2"></div>
                 <div class="color col3"></div>
@@ -37,8 +37,16 @@
                 <div class="color col7"></div>
                 <div class="color col8"></div>
             </div>
-            <div class="pro_tools" id="pro_utils">
-                <input type="color" value="#FFF" class="color-selector" />
+            <button class="erase">Erase</button>
+            <div class="pro-tools" id="pro-utils">
+                <div class="pen-selector">
+                    <div class="pen-text">Pen color:</div>
+                    <input type="color" value="#FFF" class="color-selector" id="pen-color-selector"/>
+                </div>
+                <div class="canvas-selector">
+                    <div class="canvas-text">Canvas color:</div>
+                    <input type="color" value="#FFF" class="color-selector" id="canvas-color-selector"/>
+                </div>
                 <button class="color-picker">Picker</button>
                 <button class="random">Random!</button>
                 <button class="opacityMode inactive">Opacity: Off</button>

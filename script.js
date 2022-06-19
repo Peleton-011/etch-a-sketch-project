@@ -4,10 +4,12 @@ const grid = document.querySelector(".grid");
 let defaultColor = getComputedStyle(r).getPropertyValue("--default-color");
 
 let color = getComputedStyle(r).getPropertyValue("--default-paint");
+let oldColor = color;
 let ryb;
 let opacityMode = false;
 let pickingColor = false;
 let randomMode = false;
+let erasing = false;
 let opacity = 50;
 let mode = "mouseover";
 let notProMode = true;
@@ -21,6 +23,31 @@ var mouseDown = false;
 function setup() {
     populateGrid();
     changeColor(color);
+
+    const canvasSelector = document.querySelector("#canvas-color-selector");
+    console.log(canvasSelector);
+    canvasSelector.addEventListener("input", (e) => {
+        console.log(canvasSelector.value);
+        defaultColor = canvasSelector.value;
+
+        r.style.setProperty("--default-color", defaultColor);
+        reloadCss();
+    });
+
+    //Erase button
+    const eraseBtn = document.querySelector(".erase");
+    eraseBtn.addEventListener("click", () => {
+
+        if (erasing) {
+            console.log("is erasin")
+            color = oldColor;
+        } else {
+            oldColor = color;
+            color = defaultColor;
+        }
+
+        erasing = !erasing;
+    });
 
     //Github profile button
     const githubProfile = document.querySelector(".github-profile");
@@ -73,23 +100,23 @@ function setup() {
     });
 
     //Hide protools stuff
-    document.querySelectorAll(".pro_tools").forEach((elem) => {
+    document.querySelectorAll(".pro-tools").forEach((elem) => {
         updateHidden(elem, notProMode);
     });
 
     //Color picker reader
-    const colorSelector = document.querySelector(".color-selector");
+    const colorSelector = document.querySelector("#pen-color-selector");
     colorSelector.addEventListener("input", (e) => {
         color = e.target.value;
         changeColor(color);
     });
 
     //Pro utils mode button
-    const proModeBtn = document.querySelector(".pro_button");
+    const proModeBtn = document.querySelector(".pro-button");
     proModeBtn.addEventListener("click", () => {
         notProMode = !notProMode;
 
-        document.querySelectorAll(".pro_tools").forEach((elem) => {
+        document.querySelectorAll(".pro-tools").forEach((elem) => {
             updateHidden(elem, notProMode);
         });
 
@@ -160,6 +187,18 @@ function reset() {
     for (let i = 0; i < side * side; i++) {
         let children = grid.childNodes;
         children[i].style.backgroundColor = defaultColor;
+    }
+}
+
+//Reload all css
+function reloadCss()
+{
+    var links = document.getElementsByTagName("link");
+    for (var cl in links)
+    {
+        var link = links[cl];
+        if (link.rel === "stylesheet")
+            link.href += "";
     }
 }
 

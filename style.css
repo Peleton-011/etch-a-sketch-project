@@ -125,17 +125,25 @@ header {
     background-color: #800080;
 }
 
-#pro_utils {
+#pro-utils {
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 15px;
 }
 
-.color_selector {
+.color-selector {
     border-style: none;
     height: 30px;
     width: 64px;
+}
+
+.pen-selector,
+.canvas-selector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
 }
 
 .slider {
@@ -186,11 +194,16 @@ header button {
     margin: 0px -2px;
 }
 
-button {
+button,
+.pen-text,
+.canvas-text {
     color: #001858;
     font-family: Kanit;
     font-weight: 400;
     font-size: 14px;
+}
+
+button {
     padding: 8px 16px;
     border: 0px solid #001858;
     border-radius: 9px;
