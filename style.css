@@ -217,6 +217,11 @@ button.active {
     box-shadow: none;
 }
 
+header button.active {
+    background-color: #f3d2c1;
+    color: #001858;
+}
+
 footer {
     grid-area: footer;
     background-color: #001858;
@@ -236,4 +241,3 @@ footer {
     align-self: center;
     height: 25px;
 }
-

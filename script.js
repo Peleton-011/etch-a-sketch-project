@@ -195,14 +195,11 @@ function reset() {
 }
 
 //Reload all css
-function reloadCss()
-{
+function reloadCss() {
     var links = document.getElementsByTagName("link");
-    for (var cl in links)
-    {
+    for (var cl in links) {
         var link = links[cl];
-        if (link.rel === "stylesheet")
-            link.href += "";
+        if (link.rel === "stylesheet") link.href += "";
     }
 }
 
@@ -246,12 +243,14 @@ function populateGrid() {
         //         break;
         // }
         newCell.addEventListener("mousedown", (e) => {
-            if ((mode == "click") && !pickingColor) {
+            if (mode == "click" && !pickingColor) {
                 paint(e);
             } else if (pickingColor) {
                 color = e.target.style.backgroundColor;
                 pickingColor = false;
-                document.querySelector(".color-picker").classList.remove("active");
+                document
+                    .querySelector(".color-picker")
+                    .classList.remove("active");
             }
         });
         newCell.addEventListener("mouseover", (e) => {
