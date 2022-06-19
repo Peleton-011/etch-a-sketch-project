@@ -1,6 +1,6 @@
 :root {
     --grid-side: 4;
-    --default-color: #ffffff;
+    --default-color: #fef6e4;
     --default-paint: #000000;
     --roundness: 20px;
     --grid-size: 80vh;
@@ -214,6 +214,7 @@ button {
     border-radius: 9px;
     background-color: #fef6e4;
     box-shadow: 2px 2px 5px #000000;
+    transition: background-color 0.4s ease;
 }
 
 button.active {
