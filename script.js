@@ -226,6 +226,7 @@ function populateGrid() {
     //Create new grid
     const cell = document.createElement("div");
     cell.classList.add("cell");
+    cell.style.transition = "background-color 0.4s ease";
     for (let i = 0; i < side * side; i++) {
         const newCell = cell.cloneNode(true);
         // switch (i) {
