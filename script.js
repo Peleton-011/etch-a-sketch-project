@@ -151,8 +151,9 @@ function setup() {
     });
 
     //Reset button, paints all cells in the grid in the default color
-    const resetBtn = document.querySelector(".reset");
-    resetBtn.addEventListener("click", reset);
+    document.querySelectorAll(".reset").forEach(resetBtn => {
+        resetBtn.addEventListener("click", reset);
+    });
 
     //New grid button, generates a new grid of the desired size, from 2x2 to 100x100
     const newGridBtn = document.querySelector(".new");
