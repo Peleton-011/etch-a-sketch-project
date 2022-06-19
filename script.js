@@ -22,6 +22,12 @@ function setup() {
     populateGrid();
     changeColor(color);
 
+    //Github profile button
+    const githubProfile = document.querySelector(".github-profile");
+    githubProfile.addEventListener("click", () => {
+        window.open("https://github.com/Peleton-011");
+    });
+
     //Pick a color from the current grid
     const colPickerBtn = document.querySelector(".color-picker");
     colPickerBtn.addEventListener("click", () => {

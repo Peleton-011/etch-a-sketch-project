@@ -212,3 +212,9 @@ footer {
     font-weight: 400;
     font-size: 16px;
 }
+
+.github-profile {
+    align-self: center;
+    height: 25px;
+}
+
