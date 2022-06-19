@@ -211,6 +211,12 @@ button {
     box-shadow: 2px 2px 5px #000000;
 }
 
+button.active {
+    color: #fef6e4;
+    background-color: #001858;
+    box-shadow: none;
+}
+
 footer {
     grid-area: footer;
     background-color: #001858;

@@ -6,10 +6,8 @@ let defaultColor = getComputedStyle(r).getPropertyValue("--default-color");
 let color = getComputedStyle(r).getPropertyValue("--default-paint");
 let oldColor = color;
 let ryb;
-let opacityMode = false;
-let pickingColor = false;
-let randomMode = false;
-let erasing = false;
+let opacityMode, pickingColor, randomMode, erasing;
+opacityMode = pickingColor = randomMode = erasing = false;
 let opacity = 50;
 let mode = "mouseover";
 let notProMode = true;
@@ -24,10 +22,9 @@ function setup() {
     populateGrid();
     changeColor(color);
 
+    //Background color selector
     const canvasSelector = document.querySelector("#canvas-color-selector");
-    console.log(canvasSelector);
     canvasSelector.addEventListener("input", (e) => {
-        console.log(canvasSelector.value);
         defaultColor = canvasSelector.value;
 
         r.style.setProperty("--default-color", defaultColor);
@@ -36,10 +33,10 @@ function setup() {
 
     //Erase button
     const eraseBtn = document.querySelector(".erase");
-    eraseBtn.addEventListener("click", () => {
+    eraseBtn.addEventListener("click", (e) => {
+        toggleActive(e);
 
         if (erasing) {
-            console.log("is erasin")
             color = oldColor;
         } else {
             oldColor = color;
@@ -57,7 +54,9 @@ function setup() {
 
     //Pick a color from the current grid
     const colPickerBtn = document.querySelector(".color-picker");
-    colPickerBtn.addEventListener("click", () => {
+    colPickerBtn.addEventListener("click", (e) => {
+        toggleActive(e);
+
         pickingColor = !pickingColor;
     });
 
@@ -75,7 +74,9 @@ function setup() {
 
     //Random color button
     const randomBtn = document.querySelector(".random");
-    randomBtn.addEventListener("click", () => {
+    randomBtn.addEventListener("click", (e) => {
+        toggleActive(e);
+
         randomMode = !randomMode;
         randomBtn.textContent = randomMode ? "Stop this madness" : "Random!";
     });
@@ -93,7 +94,8 @@ function setup() {
     //Opacity toggle switch
     const opacityBtn = document.querySelector(".opacityMode");
     opacityBtn.addEventListener("click", (e) => {
-        opacityBtn.classList.toggle("inactive");
+        toggleActive(e);
+
         updateHidden(document.querySelector(".opacityInputs"), opacityMode);
         opacityMode = !opacityMode;
         opacityBtn.textContent = opacityMode ? "Opacity: On" : "Opacity: Off";
@@ -113,7 +115,9 @@ function setup() {
 
     //Pro utils mode button
     const proModeBtn = document.querySelector(".pro-button");
-    proModeBtn.addEventListener("click", () => {
+    proModeBtn.addEventListener("click", (e) => {
+        toggleActive(e);
+
         notProMode = !notProMode;
 
         document.querySelectorAll(".pro-tools").forEach((elem) => {
@@ -247,6 +251,7 @@ function populateGrid() {
             } else if (pickingColor) {
                 color = e.target.style.backgroundColor;
                 pickingColor = false;
+                document.querySelector(".color-picker").classList.remove("active");
             }
         });
         newCell.addEventListener("mouseover", (e) => {
@@ -266,6 +271,10 @@ function populateGrid() {
         grid.appendChild(newCell);
     }
     reset();
+}
+
+function toggleActive(e) {
+    e.target.classList.toggle("active");
 }
 
 //Paints element "e" (Changes background color)
