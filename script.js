@@ -6,8 +6,8 @@ let defaultColor = getComputedStyle(r).getPropertyValue("--default-color");
 let color = getComputedStyle(r).getPropertyValue("--default-paint");
 let oldColor = color;
 let ryb;
-let opacityMode, pickingColor, randomMode, erasing, proMode;
-opacityMode = pickingColor = randomMode = erasing = proMode = false;
+let opacityMode, pickingColor, randomMode, erasing, proMode, gridView;
+opacityMode = pickingColor = randomMode = erasing = proMode = gridView = false;
 let opacity = 50;
 let mode = "mouseover";
 
@@ -20,6 +20,46 @@ var mouseDown = false;
 function setup() {
     populateGrid();
     changeColor(color);
+
+    //Toggle grid visibility
+    const gridViewBtn = document.querySelector(".grid-view");
+    gridViewBtn.addEventListener("click", (e) => {
+        gridView = !gridView;
+
+        const cells = document.querySelectorAll(".cell");
+        if (gridView) {
+            let i = 0;
+            cells.forEach((cell) => {
+                cell.style.border = "1px solid var(--default-color)";
+
+                //top side
+                if (i < side) {
+                    cell.style.borderTop = "0px none var(--default-color)";
+                }
+
+                //left side
+                if (i % side == 0) {
+                    cell.style.borderLeft = "0px none var(--default-color)";
+                }
+
+                //bottom side
+                if (i >= side * (side - 1)) {
+                    cell.style.borderBottom = "0px none var(--default-color)";
+                }
+
+                //right side
+                if ((i + 1) % side == 0) {
+                    cell.style.borderRight = "0px none var(--default-color)";
+                }
+
+                i++;
+            });
+        } else {
+            cells.forEach((cell) => {
+                cell.style.border = "0px none var(--default-color)";
+            });
+        }
+    });
 
     //Background color selector
     const canvasSelector = document.querySelector("#canvas-color-selector");
@@ -35,17 +75,17 @@ function setup() {
         eraseBtn.addEventListener("click", (e) => {
             document.querySelectorAll(".erase").forEach((eraseBtns) => {
                 eraseBtns.classList.toggle("active");
-            })
-    
+            });
+
             if (erasing) {
                 color = oldColor;
             } else {
                 oldColor = color;
                 color = defaultColor;
             }
-    
+
             erasing = !erasing;
-        });    
+        });
     });
 
     //Github profile button
@@ -151,7 +191,7 @@ function setup() {
     });
 
     //Reset button, paints all cells in the grid in the default color
-    document.querySelectorAll(".reset").forEach(resetBtn => {
+    document.querySelectorAll(".reset").forEach((resetBtn) => {
         resetBtn.addEventListener("click", reset);
     });
 

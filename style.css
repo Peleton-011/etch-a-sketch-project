@@ -77,7 +77,7 @@ header {
     border-radius: 0px 0px var(--roundness) 0px;
 }
 
-.left-side {
+.left-blank {
     grid-area: blank;
 }
 
