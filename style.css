@@ -174,7 +174,7 @@ header {
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    background: #04aa6d;
+    background: #001858;
     cursor: pointer;
 }
 
@@ -182,8 +182,14 @@ header {
     width: 25px;
     height: 25px;
     border-radius: 50%;
-    background: #04aa6d;
+    background: #001858;
     cursor: pointer;
+}
+
+.opacity-inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 header button {
@@ -196,7 +202,7 @@ header button {
     border: 2px solid #f3d2c1;
     background-color: #001858;
     box-shadow: none;
-    margin: 0px -2px;
+    margin: 0px -4px;
 }
 
 button,
@@ -206,6 +212,13 @@ button,
     font-family: Kanit;
     font-weight: 400;
     font-size: 14px;
+}
+
+.output {
+    color: #001858;
+    font-family: Kanit;
+    font-weight: 400;
+    font-size: 16px;
 }
 
 button {
