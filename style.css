@@ -22,9 +22,14 @@ body {
     grid-template-rows: 8vh 87vh 5vh;
 }
 
+header,
+footer {
+    background: rgb(193,147,197);
+    background: linear-gradient(90deg, rgba(193,147,197,1) 30%, rgba(123,198,204,1) 70%); 
+}
+
 header {
     height: 8vh;
-    background-color: #001858;
     grid-area: header;
     display: flex;
     justify-content: center;
@@ -195,12 +200,10 @@ header {
 header button {
     padding-top: 0px;
     padding-bottom: 0px;
-    color: #f3d2c1;
     font-size: 16px;
     height: 4vh;
     border-radius: 0px;
-    border: 2px solid #f3d2c1;
-    background-color: #001858;
+    border: 2px solid #001858;
     box-shadow: none;
     margin: 0px -4px;
 }
@@ -222,7 +225,7 @@ button,
 }
 
 button {
-    padding: 8px 16px;
+    padding: 6px 12px;
     border: 0px solid #001858;
     border-radius: 9px;
     background-color: #fef6e4;
@@ -236,11 +239,6 @@ button.active {
     box-shadow: none;
 }
 
-header button.active {
-    background-color: #f3d2c1;
-    color: #001858;
-}
-
 footer {
     grid-area: footer;
     background-color: #001858;
@@ -250,7 +248,7 @@ footer {
 }
 
 .footer-text {
-    color: #fef6e4;
+    color: #001858;
     font-family: Kanit;
     font-weight: 400;
     font-size: 16px;
@@ -259,4 +257,5 @@ footer {
 .github-profile {
     align-self: center;
     height: 25px;
+    filter: brightness(0%) saturate(100%) invert(5%) sepia(93%) saturate(7429%) hue-rotate(217deg) brightness(77%) contrast(109%);
 }
