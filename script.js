@@ -24,6 +24,8 @@ function setup() {
     //Toggle grid visibility
     const gridViewBtn = document.querySelector(".grid-view");
     gridViewBtn.addEventListener("click", (e) => {
+        toggleActive(e);
+
         gridView = !gridView;
 
         const cells = document.querySelectorAll(".cell");
