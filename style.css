@@ -1,6 +1,7 @@
 :root {
     --grid-side: 4;
     --grid-color: #242629;
+    --pen-color: #000000;
     --background-color: #16161a;
     --default-paint: #000000;
     --roundness: 20px;
@@ -175,7 +176,19 @@ header {
 }
 
 .color-selector {
-    border-style: none;
+    visibility: hidden;
+}
+
+.canvas-label {
+    background-color: var(--grid-color);
+}
+
+.pen-label {
+    background-color: var(--pen-color);
+}
+
+label {
+    border-radius: 9px;
     height: 30px;
     width: 64px;
 }
@@ -254,7 +267,7 @@ button,
 }
 
 .output {
-    color: var(--button-text-color);
+    color: var(--text-color);
     font-family: Kanit;
     font-weight: 400;
     font-size: 16px;
@@ -270,7 +283,8 @@ button {
     transition: background-color 0.4s ease;
 }
 
-button.active {
+button.active,
+button:active {
     color: var(--text-color-active);
     background-color: var(--button-background-active);
     box-shadow: none;
@@ -293,6 +307,7 @@ footer {
 .github-profile {
     align-self: center;
     height: 25px;
-    filter: brightness(0%) saturate(100%) invert(8%) sepia(18%) saturate(3492%) hue-rotate(203deg) brightness(93%) contrast(112%);
+    filter: brightness(0%) saturate(100%) invert(26%) sepia(35%) saturate(3587%) hue-rotate(236deg) brightness(88%) contrast(90%);
+    /* filter: brightness(0%) saturate(100%) invert(8%) sepia(18%) saturate(3492%) hue-rotate(203deg) brightness(93%) contrast(112%); */
     /* filter: brightness(0%) saturate(100%) invert(5%) sepia(93%) saturate(7429%) hue-rotate(217deg) brightness(77%) contrast(109%); */
 }

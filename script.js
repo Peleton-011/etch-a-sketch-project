@@ -154,6 +154,8 @@ function setup() {
     const colorSelector = document.querySelector("#pen-color-selector");
     colorSelector.addEventListener("input", (e) => {
         color = e.target.value;
+
+        r.style.setProperty("--pen-color", color);
         changeColor(color);
     });
 
