@@ -1,7 +1,7 @@
 const r = document.querySelector(":root");
 const grid = document.querySelector(".grid");
 
-let defaultColor = getComputedStyle(r).getPropertyValue("--default-color");
+let defaultColor = getComputedStyle(r).getPropertyValue("--grid-color");
 
 let color = getComputedStyle(r).getPropertyValue("--default-paint");
 let oldColor = color;
@@ -32,33 +32,33 @@ function setup() {
         if (gridView) {
             let i = 0;
             cells.forEach((cell) => {
-                cell.style.border = "1px solid var(--default-color)";
+                cell.style.border = "1px solid var(--grid-color)";
 
                 //top side
                 if (i < side) {
-                    cell.style.borderTop = "0px none var(--default-color)";
+                    cell.style.borderTop = "0px none var(--grid-color)";
                 }
 
                 //left side
                 if (i % side == 0) {
-                    cell.style.borderLeft = "0px none var(--default-color)";
+                    cell.style.borderLeft = "0px none var(--grid-color)";
                 }
 
                 //bottom side
                 if (i >= side * (side - 1)) {
-                    cell.style.borderBottom = "0px none var(--default-color)";
+                    cell.style.borderBottom = "0px none var(--grid-color)";
                 }
 
                 //right side
                 if ((i + 1) % side == 0) {
-                    cell.style.borderRight = "0px none var(--default-color)";
+                    cell.style.borderRight = "0px none var(--grid-color)";
                 }
 
                 i++;
             });
         } else {
             cells.forEach((cell) => {
-                cell.style.border = "0px none var(--default-color)";
+                cell.style.border = "0px none var(--grid-color)";
             });
         }
     });
@@ -68,8 +68,7 @@ function setup() {
     canvasSelector.addEventListener("input", (e) => {
         defaultColor = canvasSelector.value;
 
-        r.style.setProperty("--default-color", defaultColor);
-        reloadCss();
+        r.style.setProperty("--grid-color", defaultColor);
     });
 
     //Erase button(s)
@@ -108,6 +107,7 @@ function setup() {
     const bod = document.querySelector("body");
     bod.addEventListener("click", update);
 
+    //Keep track of mouse state
     bod.addEventListener("mousedown", () => {
         mouseDown = true;
     });
@@ -220,7 +220,7 @@ function setup() {
             event.clientX >= window.innerWidth ||
             event.clientY >= window.innerHeight
         ) {
-            mouseDown = 0;
+            mouseDown = false;
         }
     });
 }
@@ -240,15 +240,6 @@ function reset() {
     for (let i = 0; i < side * side; i++) {
         let children = grid.childNodes;
         children[i].style.backgroundColor = defaultColor;
-    }
-}
-
-//Reload all css
-function reloadCss() {
-    var links = document.getElementsByTagName("link");
-    for (var cl in links) {
-        var link = links[cl];
-        if (link.rel === "stylesheet") link.href += "";
     }
 }
 
@@ -328,17 +319,19 @@ function toggleActive(e) {
 
 //Paints element "e" (Changes background color)
 function paint(e) {
+    let tempColor = erasing ? defaultColor : color;
+
     if (randomMode) {
         let r = Math.floor(Math.random() * 256);
         let g = Math.floor(Math.random() * 256);
         let b = Math.floor(Math.random() * 256);
 
-        color = rgbToStr(r, g, b);
-        changeColor(color);
+        tempColor = rgbToStr(r, g, b);
+        changeColor(tempColor);
     }
 
     if (!opacityMode) {
-        e.target.style.backgroundColor = color;
+        e.target.style.backgroundColor = tempColor;
     } else {
         mix(e);
     }
@@ -481,11 +474,13 @@ function rgbToStr(r = 255, g = 255, b = 255) {
 function mix(e) {
     let currColor = e.target.style.backgroundColor;
     let rgb2 = strToRgb(currColor);
+    const aux = strToRgb(defaultColor);
+    const tempRyb = erasing ? rgbToRyb(aux[0], aux[1], aux[2]) : ryb;
     const ryb2 = rgbToRyb(rgb2[0], rgb2[1], rgb2[2]);
     const finalRyb = [];
 
     for (let i = 0; i < 3; i++) {
-        let proportioned1 = Number(ryb[i]) * (opacity / 100);
+        let proportioned1 = Number(tempRyb[i]) * (opacity / 100);
         let proportioned2 = Number(ryb2[i]) * (1 - opacity / 100);
         let aux = proportioned1 + proportioned2;
         finalRyb.push(aux.toFixed(0));
