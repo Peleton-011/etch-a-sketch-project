@@ -166,7 +166,13 @@ function setup() {
 
         proMode = !proMode;
 
-        if (!proMode) {
+        if (opacityMode) {
+
+            opacityBtn.classList.toggle("active");
+
+            updateHidden(document.querySelector("#opacity-inputs"), opacityMode);
+            opacityBtn.textContent = "Opacity: Off";
+
             opacityMode = false;
         }
 
