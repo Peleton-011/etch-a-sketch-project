@@ -140,7 +140,7 @@ function setup() {
     opacityBtn.addEventListener("click", (e) => {
         toggleActive(e);
 
-        updateHidden(document.querySelector(".opacity-inputs"), opacityMode);
+        updateHidden(document.querySelector("#opacity-inputs"), opacityMode);
         opacityMode = !opacityMode;
         opacityBtn.textContent = opacityMode ? "Opacity: On" : "Opacity: Off";
     });
@@ -166,6 +166,10 @@ function setup() {
 
         proMode = !proMode;
 
+        if (!proMode) {
+            opacityMode = false;
+        }
+
         document.querySelectorAll(".not-pro").forEach((e) => {
             updateHidden(e, proMode);
         });
@@ -174,7 +178,7 @@ function setup() {
             updateHidden(elem, !proMode);
         });
 
-        updateHidden(document.querySelector(".opacity-inputs"), !opacityMode);
+        updateHidden(document.querySelector("#opacity-inputs"), !opacityMode);
     });
 
     //Color picker buttons

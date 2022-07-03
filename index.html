@@ -74,21 +74,21 @@
                 <button class="random toggleable">Random!</button>
                 <button class="reset">Restart</button>
                 <button class="opacityMode toggleable">Opacity: Off</button>
-                <div class="opacity-inputs">
-                    <input
-                        type="range"
-                        min="1"
-                        max="100"
-                        class="slider"
-                        orient="vertical"
-                        id="opacity"
-                        name="opacity"
-                        oninput="amount.value=opacity.value"
-                    />
-                    <p class="output">
-                        <output id="opacityOut" for="opacity">0</output>%
-                    </p>
-                </div>
+            </div>
+            <div class="pro-tools" id="opacity-inputs">
+                <input
+                    type="range"
+                    min="1"
+                    max="100"
+                    class="slider"
+                    orient="vertical"
+                    id="opacity"
+                    name="opacity"
+                    oninput="amount.value=opacity.value"
+                />
+                <p class="output">
+                    <output id="opacityOut" for="opacity">0</output>%
+                </p>
             </div>
         </div>
         <footer>
